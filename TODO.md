@@ -2,8 +2,8 @@
 
 ## Must-fix before going live
 
-- [ ] **Phone number** — replace every `[ADD PHONE NUMBER]` in `index.html` (appears in: top bar, header, hero, sticky mobile call bar, CTA band, footer) and update the `tel:+10000000000` links to the real number.
-- [ ] **Email address** — replace every `[ADD EMAIL ADDRESS]` (footer, LocalBusiness schema, form `action="mailto:..."`) with your real business email.
+- [x] **Phone number** — (239) 933-4610 is live across the site.
+- [x] **Email address** — info@fortmyerswindowreplacements.com is live across the site.
 - [ ] **Business address / service area** — currently set up as service-area-only (no public street address). If you get a storefront/warehouse address later, add it to the `PostalAddress` schema block in `<head>` and consider a dedicated "About" section.
 - [ ] **License number** — replace `[ADD LICENSE NUMBER]` in the footer with your Florida contractor license number (required by FL law for advertising).
 - [ ] **Real customer reviews** — the "What Our Clients Say" section has 3 placeholder review cards clearly flagged "Placeholder — replace before launch." Swap in real Google/Yelp/Facebook reviews once you have them. Don't publish fake reviews — real ones are also better for trust and SEO.
