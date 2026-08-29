@@ -1,3 +1,6 @@
 .DS_Store
 .vercel
 node_modules/
+
+# Raw screenshot originals (optimized copies live in images/)
+Screenshot *.png
