@@ -16,22 +16,33 @@ document.querySelector('.mobile-toggle').addEventListener('click', function(){
   nav.style.borderBottom = '1px solid #e4e9f1';
 });
 
-var navDropdown = document.querySelector('.nav-dropdown');
-var navDropTrigger = document.querySelector('.nav-drop-trigger');
-navDropTrigger.addEventListener('click', function(e){
-  e.stopPropagation();
-  var isOpen = navDropdown.classList.toggle('open');
-  navDropTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+// Supports multiple independent nav dropdowns (Services, Service Areas, ...)
+document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+  var trigger = dd.querySelector('.nav-drop-trigger');
+  trigger.addEventListener('click', function(e){
+    e.stopPropagation();
+    var isOpen = dd.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown.open').forEach(function(other){
+      other.classList.remove('open');
+      other.querySelector('.nav-drop-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      dd.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+  });
+  dd.querySelectorAll('.nav-drop-panel a').forEach(function(a){
+    a.addEventListener('click', function(){
+      dd.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+  });
 });
 document.addEventListener('click', function(e){
-  if (!navDropdown.contains(e.target)) {
-    navDropdown.classList.remove('open');
-    navDropTrigger.setAttribute('aria-expanded', 'false');
-  }
-});
-document.querySelectorAll('.nav-drop-panel a').forEach(function(a){
-  a.addEventListener('click', function(){
-    navDropdown.classList.remove('open');
-    navDropTrigger.setAttribute('aria-expanded', 'false');
+  document.querySelectorAll('.nav-dropdown.open').forEach(function(dd){
+    if (!dd.contains(e.target)) {
+      dd.classList.remove('open');
+      dd.querySelector('.nav-drop-trigger').setAttribute('aria-expanded', 'false');
+    }
   });
 });
