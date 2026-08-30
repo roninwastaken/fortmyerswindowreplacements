@@ -168,6 +168,22 @@ nav.primary a:hover{color:var(--blue-dark);}
 }
 .logo{white-space:nowrap;}
 
+/* Services dropdown */
+.nav-dropdown{position:relative;}
+.nav-drop-trigger{display:flex;align-items:center;gap:5px;background:none;border:none;font:inherit;font-weight:600;font-size:.88rem;color:var(--text);cursor:pointer;padding:0;}
+.nav-drop-trigger:hover{color:var(--blue-dark);}
+.nav-drop-trigger .caret{font-size:.7rem;transition:transform .15s ease;}
+.nav-dropdown.open .nav-drop-trigger .caret{transform:rotate(180deg);}
+.nav-drop-panel{display:none;position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 40px rgba(15,35,65,.16);padding:10px;min-width:250px;z-index:80;}
+.nav-dropdown.open .nav-drop-panel{display:block;}
+.nav-drop-panel a{display:block;padding:10px 14px;border-radius:6px;font-size:.9rem;font-weight:600;color:var(--text);white-space:nowrap;}
+.nav-drop-panel a:hover{background:var(--bg);color:var(--blue-dark);}
+.nav-drop-panel hr{border:none;border-top:1px solid var(--border);margin:6px 4px;}
+@media (max-width:900px){
+  .nav-drop-panel{position:static;transform:none;box-shadow:none;border:none;padding:0 0 0 14px;min-width:0;margin-top:6px;}
+  .nav-drop-trigger{width:100%;justify-content:space-between;padding:6px 0;}
+}
+
 /* Hero */
 .hero{position:relative;background:linear-gradient(135deg,rgba(18,43,79,.92) 0%,rgba(27,58,99,.85) 55%,rgba(37,77,128,.8) 100%),url("images/covered-patio-sliding-glass-doors-fort-myers.jpg") center 30%/cover no-repeat;color:#fff;padding:70px 0 60px;overflow:hidden;}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(77,141,255,.25),transparent 55%);pointer-events:none;}
@@ -320,7 +336,24 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
     </a>
     <nav class="primary">
       <a href="#top">Home</a>
-      <a href="#services">Services</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret">▾</span></button>
+        <div class="nav-drop-panel">
+          <a href="#window-installation">Window Installation</a>
+          <a href="#window-replacement">Window Replacement</a>
+          <a href="#residential">Residential Windows</a>
+          <a href="#commercial">Commercial Windows</a>
+          <a href="#remodeling">Window Remodeling</a>
+          <a href="#window-repair">Window Repair</a>
+          <a href="#impact-windows">Impact Windows</a>
+          <a href="#energy-efficient">Energy-Efficient Windows</a>
+          <hr>
+          <a href="#window-installation">Installation in Fort Myers</a>
+          <a href="#window-repair">Repair in Fort Myers</a>
+          <a href="#impact-windows">Impact Windows in Fort Myers</a>
+          <a href="#commercial">Commercial in Fort Myers</a>
+        </div>
+      </div>
       <a href="#impact-windows">Impact Windows</a>
       <a href="#window-repair">Window Repair</a>
       <a href="#areas">Service Areas</a>
@@ -467,7 +500,7 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
         </div>
       </div>
 
-      <div class="service-block">
+      <div class="service-block" id="residential">
         <div class="service-media"><img src="images/courtyard-pool-sliding-doors-fort-myers.jpg" alt="Residential sliding glass door window replacement around a Fort Myers pool courtyard" loading="lazy"></div>
         <div class="service-copy">
           <h3>Residential Window Replacement in Fort Myers</h3>
@@ -481,7 +514,7 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
         </div>
       </div>
 
-      <div class="service-block">
+      <div class="service-block" id="commercial">
         <div class="service-media">Commercial Window<br>Replacement</div>
         <div class="service-copy">
           <h3>Commercial Window Replacement in Fort Myers</h3>
@@ -495,7 +528,7 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
         </div>
       </div>
 
-      <div class="service-block">
+      <div class="service-block" id="remodeling">
         <div class="service-media"><img src="images/bay-window-installation-fort-myers.jpg" alt="Bay window remodel and upgrade installed on a Fort Myers home" loading="lazy"></div>
         <div class="service-copy">
           <h3>Window Remodeling &amp; Upgrades in Fort Myers</h3>
@@ -523,7 +556,7 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
         </div>
       </div>
 
-      <div class="service-block">
+      <div class="service-block" id="energy-efficient">
         <div class="service-media"><img src="images/arched-exterior-window-installation-fort-myers.jpg" alt="Energy-efficient arched window installation on a Fort Myers home exterior" loading="lazy"></div>
         <div class="service-copy">
           <h3>Energy-Efficient Windows in Fort Myers</h3>
@@ -537,7 +570,7 @@ footer.site{background:var(--navy-3);color:#a9b7cf;padding:50px 0 24px;font-size
         </div>
       </div>
 
-      <div class="service-block">
+      <div class="service-block" id="window-installation">
         <div class="service-media"><img src="images/covered-patio-sliding-glass-doors-fort-myers.jpg" alt="New construction sliding glass door window installation on a covered Fort Myers patio" loading="lazy"></div>
         <div class="service-copy">
           <h3>Window Installation for New Construction</h3>
@@ -871,6 +904,26 @@ document.querySelector('.mobile-toggle').addEventListener('click', function(){
   nav.style.background = '#fff';
   nav.style.padding = '16px 24px';
   nav.style.borderBottom = '1px solid #e4e9f1';
+});
+
+var navDropdown = document.querySelector('.nav-dropdown');
+var navDropTrigger = document.querySelector('.nav-drop-trigger');
+navDropTrigger.addEventListener('click', function(e){
+  e.stopPropagation();
+  var isOpen = navDropdown.classList.toggle('open');
+  navDropTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.addEventListener('click', function(e){
+  if (!navDropdown.contains(e.target)) {
+    navDropdown.classList.remove('open');
+    navDropTrigger.setAttribute('aria-expanded', 'false');
+  }
+});
+document.querySelectorAll('.nav-drop-panel a').forEach(function(a){
+  a.addEventListener('click', function(){
+    navDropdown.classList.remove('open');
+    navDropTrigger.setAttribute('aria-expanded', 'false');
+  });
 });
 </script>
 
