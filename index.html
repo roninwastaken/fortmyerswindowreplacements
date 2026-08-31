@@ -203,23 +203,23 @@
       <div>
         <h2>Request a Free Estimate</h2>
         <p>Tell us about your project and we'll get back to you the same day with a detailed, no-obligation quote.</p>
-        <form class="lead" action="mailto:info@fortmyerswindowreplacements.com" method="post" enctype="text/plain">
+        <form class="lead" id="estimate-form">
           <input type="text" name="name" placeholder="Full Name" required>
           <input type="tel" name="phone" placeholder="Phone Number" required>
           <input type="email" name="email" placeholder="Email Address" required>
           <textarea name="message" rows="3" placeholder="Tell us about your project"></textarea>
           <button type="submit" class="btn btn-primary btn-block">Request Free Estimate</button>
-          <span class="note">Form currently submits via email placeholder — connect a form service (e.g. Formspree, Netlify Forms) before launch. See TODO list.</span>
+          <div id="estimate-form-status" role="status" aria-live="polite"></div>
         </form>
       </div>
       <div>
         <h3>Select your service to get started</h3>
         <div class="service-pills">
-          <label><input type="radio" name="svc" checked><span>Window Replacement</span></label>
-          <label><input type="radio" name="svc"><span>Impact Windows</span></label>
-          <label><input type="radio" name="svc"><span>New Installation</span></label>
-          <label><input type="radio" name="svc"><span>Commercial</span></label>
-          <label><input type="radio" name="svc"><span>Other Service</span></label>
+          <label><input type="radio" name="svc" value="Window Replacement" checked><span>Window Replacement</span></label>
+          <label><input type="radio" name="svc" value="Impact Windows"><span>Impact Windows</span></label>
+          <label><input type="radio" name="svc" value="New Installation"><span>New Installation</span></label>
+          <label><input type="radio" name="svc" value="Commercial"><span>Commercial</span></label>
+          <label><input type="radio" name="svc" value="Other Service"><span>Other Service</span></label>
         </div>
       </div>
     </div>

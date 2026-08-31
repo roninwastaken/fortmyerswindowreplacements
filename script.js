@@ -46,3 +46,48 @@ document.addEventListener('click', function(e){
     }
   });
 });
+
+// Estimate form submission (only present on the homepage)
+var estimateForm = document.getElementById('estimate-form');
+if (estimateForm) {
+  var statusEl = document.getElementById('estimate-form-status');
+  var submitBtn = estimateForm.querySelector('button[type="submit"]');
+
+  estimateForm.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var name = estimateForm.querySelector('input[name="name"]').value.trim();
+    var phone = estimateForm.querySelector('input[name="phone"]').value.trim();
+    var email = estimateForm.querySelector('input[name="email"]').value.trim();
+    var message = estimateForm.querySelector('textarea[name="message"]').value.trim();
+    var svcInput = document.querySelector('input[name="svc"]:checked');
+    var service = svcInput ? svcInput.value : '';
+
+    statusEl.className = 'sending';
+    statusEl.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    fetch('/api/submit-estimate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, phone: phone, email: email, message: message, service: service })
+    })
+      .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+      .then(function(result){
+        submitBtn.disabled = false;
+        if (result.ok) {
+          statusEl.className = 'success';
+          statusEl.textContent = 'Thanks! We got your request and will reach out shortly.';
+          estimateForm.reset();
+        } else {
+          statusEl.className = 'error';
+          statusEl.textContent = 'Something went wrong. Please call us at (239) 933-4610 instead.';
+        }
+      })
+      .catch(function(){
+        submitBtn.disabled = false;
+        statusEl.className = 'error';
+        statusEl.textContent = 'Something went wrong. Please call us at (239) 933-4610 instead.';
+      });
+  });
+}
