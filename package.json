@@ -1,0 +1,6 @@
+{
+  "name": "fort-myers-window-replacements",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fort Myers Window Replacements website — static site with a Vercel serverless function for the estimate form."
+}
